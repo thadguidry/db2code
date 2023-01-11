@@ -35,6 +35,7 @@ public class ${entity.name} {
         </#if>
     private ${field.one2One.referencedField.entityName} ${field.one2One.referencedField.entityName?uncap_first};
     <#else>
+    @Column(name = "${field.columnName}")
     private ${field.javaType} ${(field.name)!};
     </#if>
 
