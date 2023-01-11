@@ -106,7 +106,7 @@ public final class CodeGeneratorManager {
     }
 
     JpaEntityGenerator jpaEntityGenerator = new JpaEntityGenerator();
-    //jpaEntityGenerator.generate(metaData);
+    jpaEntityGenerator.generate(metaData);
   }
 
   private static DatabaseConnectionSource getDataSource() {
