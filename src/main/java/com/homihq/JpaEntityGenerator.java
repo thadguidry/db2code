@@ -4,6 +4,8 @@ import freemarker.cache.ClassTemplateLoader;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.HashMap;
@@ -23,8 +25,9 @@ public class JpaEntityGenerator {
                 data.put("entity", entity);
 
                 Template template = cfg.getTemplate("entity.ftl");
-                Writer consoleWriter = new OutputStreamWriter(System.out);
-                template.process(data, consoleWriter);
+                Writer writer = new FileWriter(new File( "/Users/dhrubo/Downloads/generator/" + entity.getName() +".java"));
+                template.process(data, writer);
+                writer.close();
             }
         }
 

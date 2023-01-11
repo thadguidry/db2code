@@ -4,7 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import schemacrawler.schema.Column;
 
 @Slf4j
-public class OneToOneDetector {
+public class OneToOneStrategy {
 
     public One2One detect(Column column, String tableNamePrefix, char tableNameDelimiter, char colNameDelimiter) {
         //case 1
@@ -13,9 +13,10 @@ public class OneToOneDetector {
 
         if(column.isPartOfForeignKey()) {
 
-            System.out.println("shared foreign key found !!!!!!! --> *SHARED*");
+            System.out.println(" foreign key found !!!!!!!");
 
             if(column.isPartOfPrimaryKey()) {
+                System.out.println(" *SHARED*");
                 one2One.setShared(true);
                 one2One.setAssociation(true);
                 one2One.setOwningSide(true);

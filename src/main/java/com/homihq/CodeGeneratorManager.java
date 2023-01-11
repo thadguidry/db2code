@@ -48,7 +48,7 @@ public final class CodeGeneratorManager {
     List<Entity> entityList = new ArrayList<>();
     metaData.setEntityList(entityList);
 
-    OneToOneDetector oneToOneDetector = new OneToOneDetector();
+    OneToOneStrategy oneToOneStrategy = new OneToOneStrategy();
 
     for (final Schema schema : catalog.getSchemas()) {
       for (final Table table : catalog.getTables(schema)) {
@@ -84,7 +84,7 @@ public final class CodeGeneratorManager {
             field.setJavaType(column.getColumnDataType().getTypeMappedClass().getSimpleName());
 
             One2One one2One =
-            oneToOneDetector.detect(column, tableNamePrefix, tableNameDelimiter, colNameDelimiter);
+            oneToOneStrategy.detect(column, tableNamePrefix, tableNameDelimiter, colNameDelimiter);
 
             field.setOne2One(one2One);
 
