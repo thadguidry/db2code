@@ -16,7 +16,7 @@ public class Entity {
 
 
 
-    public String toName(String tableName, String prefix, char delim) {
+    public static String toName(String tableName, String prefix, char delim) {
         String name = tableName;
         if(StringUtils.isNotBlank(prefix)) {
             name = tableName.replace(prefix, "");

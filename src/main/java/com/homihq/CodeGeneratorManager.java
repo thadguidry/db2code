@@ -39,58 +39,48 @@ public final class CodeGeneratorManager {
     // Set log level
     new LoggingConfig(Level.OFF);
 
-    // Create the options
-    final LimitOptionsBuilder limitOptionsBuilder =
-        LimitOptionsBuilder.builder()
-            .includeSchemas(new RegularExpressionInclusionRule("author"))
-            .includeTables(tableFullName -> !tableFullName.contains("ΒΙΒΛΊΑ"));
-    final LoadOptionsBuilder loadOptionsBuilder =
-        LoadOptionsBuilder.builder()
-            // Set what details are required in the schema - this affects the
-            // time taken to crawl the schema
-            .withSchemaInfoLevel(SchemaInfoLevelBuilder.standard());
-    final SchemaCrawlerOptions options =
-        SchemaCrawlerOptionsBuilder.newSchemaCrawlerOptions()
-            .withLimitOptions(limitOptionsBuilder.toOptions())
-            .withLoadOptions(loadOptionsBuilder.toOptions());
+    CodeGeneratorConfiguration codeGeneratorConfiguration = CodeGeneratorConfiguration.builder()
+            .domainPackageName(domainPackageName)
+            .tableNamePrefix(tableNamePrefix)
+            .tableNameDelimiter(tableNameDelimiter)
+            .colNameDelimiter(colNameDelimiter)
+            .includedSchemas(List.of("o2ofk"))
+            .build();
 
     // Get the schema definition
     final DatabaseConnectionSource dataSource = getDataSource();
-    final Catalog catalog = SchemaCrawlerUtility.getCatalog(dataSource, options);
+    final Catalog catalog = SchemaCrawlerUtility.getCatalog(dataSource, codeGeneratorConfiguration.createSchemaCrawlerOption());
 
     List<Entity> entityList = new ArrayList<>();
     metaData.setEntityList(entityList);
 
+    OneToOneDetector oneToOneDetector = new OneToOneDetector();
+
     for (final Schema schema : catalog.getSchemas()) {
-      System.out.println(schema);
       for (final Table table : catalog.getTables(schema)) {
-        System.out.print("o--> " + table);
-        if (table instanceof View) {
-          System.out.println(" (VIEW)");
-        } else {
-          System.out.println();
+
+        if (!(table instanceof View)) {
+          System.out.println("table : " + table);
           Entity entity = new Entity();
           entity.setTableName(table.getName());
-          entity.setName(entity.toName(
-                  table.getName(), tableNamePrefix, tableNameDelimiter));
+          entity.setName(entity.toName(table.getName(), tableNamePrefix, tableNameDelimiter));
 
           List<Field> fields = new ArrayList<>();
           entity.setFields(fields);
-          boolean autoIncrementingFieldPresent = false;
+
 
           for (final Column column : table.getColumns()) {
-            System.out.printf("     o--> %s (%s)%n", column, column.getType());
 
             Field field = new Field();
+            field.setTableName(entity.getTableName());
+            field.setEntityName(entity.getName());
             field.setColumnName(column.getName());
-            field.setName(
-                    field.toName(column.getName(), colNameDelimiter)
-                    );
-            System.out.println("Col : " +  column.getName());
-            System.out.println("DB Type : " +  column.getType().getName());
-            System.out.println("Java SQL Type : " +  column.getColumnDataType().getJavaSqlType().getName());
-            System.out.println("Java type " +  column.getColumnDataType().getTypeMappedClass());
-            System.out.println("Auto increment : " +  column.isAutoIncremented());
+            field.setName(field.toName(column.getName(), colNameDelimiter));
+
+
+            if(column.isPartOfPrimaryKey()) {
+              field.setPartOfPk(true);
+            }
 
             if(column.isAutoIncremented()) {
               entity.setAutoIncrementingFieldPresent(true);
@@ -98,6 +88,11 @@ public final class CodeGeneratorManager {
             }
 
             field.setJavaType(column.getColumnDataType().getTypeMappedClass().getSimpleName());
+
+            One2One one2One =
+            oneToOneDetector.detect(column, tableNamePrefix, tableNameDelimiter, colNameDelimiter);
+
+            field.setOne2One(one2One);
 
             fields.add(field);
 
@@ -111,7 +106,7 @@ public final class CodeGeneratorManager {
     }
 
     JpaEntityGenerator jpaEntityGenerator = new JpaEntityGenerator();
-    jpaEntityGenerator.generate(metaData);
+    //jpaEntityGenerator.generate(metaData);
   }
 
   private static DatabaseConnectionSource getDataSource() {

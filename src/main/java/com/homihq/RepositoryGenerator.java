@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class JpaEntityGenerator {
+public class RepositoryGenerator {
 
     public void generate(MetaData metaData) throws Exception{
         Configuration cfg = new Configuration(Configuration.VERSION_2_3_29);
@@ -27,6 +27,8 @@ public class JpaEntityGenerator {
                 template.process(data, consoleWriter);
             }
         }
+
+
 
     }
 }

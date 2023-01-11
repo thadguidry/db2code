@@ -10,6 +10,13 @@ public class Field {
     private String name;
     private String javaType;
     private boolean autoIncremented;
+    private boolean isPartOfPk;
+
+    private One2One one2One;
+
+
+    private String tableName;
+    private String entityName;
 
 
     public String toName(String columnName,  char delim) {
