@@ -4,6 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 
+import com.homihq.model.Entity;
+import com.homihq.model.Field;
+import com.homihq.model.MetaData;
+import com.homihq.model.One2One;
+import com.homihq.strategy.OneToOneStrategy;
+import com.homihq.tool.JpaEntityGenerator;
 import lombok.extern.slf4j.Slf4j;
 import schemacrawler.schema.Catalog;
 import schemacrawler.schema.Column;
@@ -57,6 +63,8 @@ public final class CodeGeneratorManager {
           System.out.println("table : " + table);
           Entity entity = new Entity();
           entity.setTableName(table.getName());
+          String entityName = entity.toName(table.getName(), tableNamePrefix, tableNameDelimiter);
+          System.out.println("entityName -> " + entityName);
           entity.setName(entity.toName(table.getName(), tableNamePrefix, tableNameDelimiter));
 
           List<Field> fields = new ArrayList<>();

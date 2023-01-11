@@ -1,4 +1,4 @@
-package com.homihq;
+package com.homihq.model;
 
 import lombok.Data;
 import org.apache.commons.text.CaseUtils;

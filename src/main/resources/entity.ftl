@@ -29,10 +29,9 @@ public class ${entity.name} {
     @OneToOne(fetch = FetchType.LAZY)
         <#if field.one2One.shared && field.one2One.owningSide>
     @MapsId
-    @JoinColumn(name = "${field.columnName}" referencedColumnName = "${field.one2One.referencedField.columnName}")
         </#if>
         <#if field.one2One.owningSide>
-    @JoinColumn(name = "${field.columnName}" referencedColumnName = "${field.one2One.referencedField.columnName}")
+    @JoinColumn(name = "${field.columnName}" , referencedColumnName = "${field.one2One.referencedField.columnName}")
         </#if>
     private ${field.one2One.referencedField.entityName} ${field.one2One.referencedField.entityName?uncap_first};
     <#else>

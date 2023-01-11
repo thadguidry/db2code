@@ -1,4 +1,4 @@
-package com.homihq;
+package com.homihq.model;
 
 import lombok.Data;
 import org.apache.commons.lang3.StringUtils;
@@ -18,8 +18,8 @@ public class Entity {
 
     public static String toName(String tableName, String prefix, char delim) {
         String name = tableName;
-        if(StringUtils.isNotBlank(prefix)) {
-            name = tableName.replace(prefix, "");
+        if(StringUtils.isNotBlank(prefix) && StringUtils.startsWith(tableName, prefix)) {
+            name = tableName.replaceFirst(prefix, "");
         }
 
         name = CaseUtils.toCamelCase(name, true, delim);
