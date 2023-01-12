@@ -26,29 +26,20 @@ jobs:
         with: # running setup-java again overwrites the settings.xml
           distribution: 'temurin'
           java-version: '17'
-#          cache: maven
           server-id: maven # Value of the distributionManagement/repository/id field of the pom.xml
           server-username: OSSRH_USERNAME
           server-password: OSSRH_PASSWORD
-#          gpg-private-key: ${{ secrets.OSSRH_GPG_SECRET_KEY }}
-#          gpg-passphrase: ${{ secrets.OSSRH_GPG_PASSPHRASE }}       
           gpg-private-key: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }} # Value of the GPG private key to import
           gpg-passphrase: OSSRH_GPG_PASSPHRASE # env variable for GPG private key passphrase
 
-#      - name: Import GPG key
-#        uses: crazy-max/ghaction-import-gpg@v5
-#        with:
-#          gpg_private_key: ${{ secrets.OSSRH_GPG_SECRET_KEY }}
-#          passphrase: ${{ secrets.OSSRH_GPG_PASSPHRASE }}
-#          git_user_signingkey: true
-#          git_commit_gpgsign: true
+
 
       - name: Publish to Apache Maven Central
         run: mvn deploy
         env:
-          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
-          MAVEN_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
-          MAVEN_GPG_PASSPHRASE: ${{ secrets.OSSRH_GPG_PASSPHRASE }}
+          OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+          OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+          OSSRH_GPG_PASSPHRASE: ${{ secrets.OSSRH_GPG_PASSPHRASE }}
 
           # MAVEN_CENTRAL_TOKEN: ${{ secrets.MAVEN_CENTRAL_TOKEN }}
           # MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
