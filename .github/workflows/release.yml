@@ -18,14 +18,14 @@ jobs:
         run: mvn -B package --file pom.xml
 
       - name: Import GPG Key
-        uses: crazy-max/ghaction-import-gpg@v4
+        uses: crazy-max/ghaction-import-gpg@v5
         with:
           gpg_private_key: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
           passphrase: ${{ secrets.OSSRH_GPG_PASSPHRASE }}
-          git_user_signingkey: true
-          git_commit_gpgsign: true
-          git_tag_gpgsign: true
-          git_push_gpgsign: false
+
+      -
+        name: List keys
+        run: gpg -K
 
       - name: Set up Apache Maven Central
         uses: actions/setup-java@v3
