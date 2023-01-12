@@ -12,6 +12,7 @@
   <description>JPA Code generator tool</description>
   <url>https://github.com/homihq/homi-jpa-tool</url>
 
+
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>17</maven.compiler.source>
@@ -155,7 +156,7 @@
                     <active>ALWAYS</active>
                     <url>https://s01.oss.sonatype.org/service/local</url>
                     <closeRepository>true</closeRepository>
-                    <releaseRepository>true</releaseRepository>
+                    <releaseRepository>false</releaseRepository>
                     <stagingRepositories>target/staging-deploy</stagingRepositories>
                   </maven-central>
                 </nexus2>
