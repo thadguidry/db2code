@@ -5,11 +5,12 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.homihq</groupId>
-  <artifactId>schemacrawler-jpa</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <artifactId>homi-jpa-tool</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
 
-  <name>schemacrawler-jpa</name>
-  <url>https://www.homihq.com</url>
+  <name>JPA Code generator tool.</name>
+  <description>JPA Code generator tool</description>
+  <url>https://github.com/homihq/homi-jpa-tool</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -18,6 +19,35 @@
     <schemacrawler.version>16.19.5</schemacrawler.version>
     <freemarker.version>2.3.31</freemarker.version>
   </properties>
+
+  <licenses>
+    <license>
+      <name>MIT License</name>
+      <url>https://github.com/solacecommunity/spring-solace-leader-election/blob/master/LICENSE</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <name>Solace Community</name>
+      <email>community-github@solace.com</email>
+      <organization>Solace Community</organization>
+      <organizationUrl>https://solace.community</organizationUrl>
+    </developer>
+  </developers>
+
+  <organization>
+    <name>Solace Community</name>
+    <url>https://solace.community</url>
+  </organization>
+
+  <scm>
+    <url>https://github.com/solacecommunity/solace-spring-integration-leader.git</url>
+    <connection>scm:git:git://github.com/solacecommunity/solace-spring-integration-leader.git</connection>
+    <developerConnection>scm:git:git@github.com:solacecommunity/solace-spring-integration-leader.git</developerConnection>
+    <tag>HEAD</tag>
+  </scm>
 
   <dependencies>
     <dependency>
@@ -81,6 +111,15 @@
   </dependencies>
 
   <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.kordamp.maven</groupId>
+          <artifactId>pomchecker-maven-plugin</artifactId>
+          <version>1.5.0</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
 
   </build>
 </project>
