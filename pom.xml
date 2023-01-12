@@ -116,10 +116,11 @@
       <activation>
         <activeByDefault>true</activeByDefault>
       </activation>
+      <!--
       <properties>
         <gpg.executable>gpg</gpg.executable>
-
       </properties>
+      -->
       <distributionManagement>
         <snapshotRepository>
           <id>ossrh</id>
