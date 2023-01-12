@@ -22,30 +22,30 @@
 
   <licenses>
     <license>
-      <name>MIT License</name>
-      <url>https://github.com/solacecommunity/spring-solace-leader-election/blob/master/LICENSE</url>
+      <name>Apache 2.0 License</name>
+      <url>https://github.com/homihq/homi-jpa-tool/blob/master/LICENSE</url>
       <distribution>repo</distribution>
     </license>
   </licenses>
 
   <developers>
     <developer>
-      <name>Solace Community</name>
-      <email>community-github@solace.com</email>
-      <organization>Solace Community</organization>
-      <organizationUrl>https://solace.community</organizationUrl>
+      <name>HOMIHQ</name>
+      <email>homi@homihq.com</email>
+      <organization>HOMIHQ</organization>
+      <organizationUrl>https://homihq.com</organizationUrl>
     </developer>
   </developers>
 
   <organization>
-    <name>Solace Community</name>
-    <url>https://solace.community</url>
+    <name>HOMIHQ</name>
+    <url>https://homihq.com</url>
   </organization>
 
   <scm>
-    <url>https://github.com/solacecommunity/solace-spring-integration-leader.git</url>
-    <connection>scm:git:git://github.com/solacecommunity/solace-spring-integration-leader.git</connection>
-    <developerConnection>scm:git:git@github.com:solacecommunity/solace-spring-integration-leader.git</developerConnection>
+    <url>https://github.com/homihq/homi-jpa-tool.git</url>
+    <connection>scm:git:git://github.com/homihq/homi-jpa-tool.git</connection>
+    <developerConnection>scm:git:git@github.com/homihq/homi-jpa-tool.git</developerConnection>
     <tag>HEAD</tag>
   </scm>
 
@@ -108,78 +108,102 @@
 
   </dependencies>
 
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>3.0.0</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.10.1</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-javadoc-plugin</artifactId>
+          <version>3.2.0</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-source-plugin</artifactId>
+          <version>3.2.1</version>
+        </plugin>
+        <plugin>
+          <groupId>org.jreleaser</groupId>
+          <artifactId>jreleaser-maven-plugin</artifactId>
+          <version>1.4.0</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+    <plugins>
+      <plugin>
+        <groupId>org.jreleaser</groupId>
+        <artifactId>jreleaser-maven-plugin</artifactId>
+        <configuration>
+          <jreleaser>
+            <signing>
+              <active>ALWAYS</active>
+              <armored>true</armored>
+            </signing>
+            <deploy>
+              <maven>
+                <nexus2>
+                  <maven-central>
+                    <active>ALWAYS</active>
+                    <url>https://s01.oss.sonatype.org/service/local</url>
+                    <closeRepository>true</closeRepository>
+                    <releaseRepository>true</releaseRepository>
+                    <stagingRepositories>target/staging-deploy</stagingRepositories>
+                  </maven-central>
+                </nexus2>
+              </maven>
+            </deploy>
+          </jreleaser>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
   <profiles>
     <profile>
-      <id>release</id>
+      <id>publication</id>
       <build>
         <plugins>
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-javadoc-plugin</artifactId>
-            <version>3.4.0</version>
             <executions>
               <execution>
-                <id>attach-javadoc</id>
+                <id>attach-javadocs</id>
                 <goals>
                   <goal>jar</goal>
                 </goals>
+                <configuration>
+                  <attach>true</attach>
+                </configuration>
               </execution>
             </executions>
           </plugin>
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-source-plugin</artifactId>
-            <version>3.2.1</version>
             <executions>
               <execution>
-                <id>attach-source</id>
+                <id>attach-sources</id>
                 <goals>
                   <goal>jar</goal>
                 </goals>
+                <configuration>
+                  <attach>true</attach>
+                </configuration>
               </execution>
             </executions>
-          </plugin>
-          <plugin>
-            <groupId>org.jreleaser</groupId>
-            <artifactId>jreleaser-maven-plugin</artifactId>
-            <version>1.4.0</version>
-            <configuration>
-              <jreleaser>
-                <signing>
-                  <active>ALWAYS</active>
-                  <armored>true</armored>
-                </signing>
-                <deploy>
-                  <maven>
-                    <nexus2>
-                      <maven-central>
-                        <active>ALWAYS</active>
-                        <url>https://s01.oss.sonatype.org/service/local</url>;
-                        <closeRepository>false</closeRepository>
-                        <releaseRepository>false</releaseRepository>
-                        <stagingRepositories>target/staging-deploy</stagingRepositories>
-                      </maven-central>
-                    </nexus2>
-                  </maven>
-                </deploy>
-              </jreleaser>
-            </configuration>
           </plugin>
         </plugins>
       </build>
     </profile>
   </profiles>
-
-  <build>
-    <pluginManagement>
-      <plugins>
-        <plugin>
-          <groupId>org.kordamp.maven</groupId>
-          <artifactId>pomchecker-maven-plugin</artifactId>
-          <version>1.5.0</version>
-        </plugin>
-      </plugins>
-    </pluginManagement>
-
-  </build>
 </project>
