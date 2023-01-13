@@ -6,7 +6,7 @@
 
   <groupId>com.homihq</groupId>
   <artifactId>db2code</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.0.1</version>
 
   <name>REST API Generator from DB tables.</name>
   <description>db2code - Generates Secure REST API from DB tables. Currently it generates code for Java Spring Boot. </description>
