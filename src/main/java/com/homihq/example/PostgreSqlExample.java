@@ -3,6 +3,7 @@ package com.homihq.example;
 import java.util.List;
 import java.util.logging.Level;
 
+import com.homihq.generator.DtoGenerator;
 import com.homihq.generator.RepositoryGenerator;
 import com.homihq.model.MetaData;
 import com.homihq.tool.Configuration;
@@ -22,6 +23,7 @@ public final class PostgreSqlExample {
     //config - external
     String domainPackageName = System.getenv().get("domainPackageName");
     String repositoryPackageName = System.getenv().get("repositoryPackageName");
+    String dtoPackageName = System.getenv().get("dtoPackageName");
     String tableNamePrefix = System.getenv().get("tableNamePrefix");
     char tableNameDelimiter = System.getenv().get("tableNameDelimiter").charAt(0);
     char colNameDelimiter = System.getenv().get("colNameDelimiter").charAt(0);
@@ -43,6 +45,7 @@ public final class PostgreSqlExample {
     MetaData metaData = new MetaData();
     metaData.setDomainPackageName(domainPackageName);
     metaData.setRepositoryPackageName(repositoryPackageName);
+    metaData.setDtoPackageName(dtoPackageName);
     metaData.setEntityList(entityList);
 
     String folder = System.getenv().get("folder");
@@ -51,6 +54,9 @@ public final class PostgreSqlExample {
 
     RepositoryGenerator repositoryGenerator = new RepositoryGenerator();
     repositoryGenerator.generate(metaData, folder);
+
+    DtoGenerator dtoGenerator = new DtoGenerator();
+    dtoGenerator.generate(metaData, folder);
   }
 
 }
