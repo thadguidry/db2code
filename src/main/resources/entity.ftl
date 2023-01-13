@@ -16,6 +16,9 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Table(name = "${entity.tableName}")
+<#if entity.compositePk>
+@IdClass(${entity.name}Id.class)
+</#if>
 public class ${entity.name} {
 
 <#list entity.fields as field>
