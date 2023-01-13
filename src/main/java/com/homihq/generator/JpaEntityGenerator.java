@@ -29,6 +29,14 @@ public class JpaEntityGenerator {
                 Writer writer = new FileWriter(fileAbsolutePath);
                 template.process(data, writer);
                 writer.close();
+
+                if(entity.isCompositePk()) {
+                    fileAbsolutePath = folder + File.separator + entity.getName() +"Id.java";
+                    template = cfg.getTemplate("compositeid.ftl");
+                    writer = new FileWriter(fileAbsolutePath);
+                    template.process(data, writer);
+                    writer.close();
+                }
             }
         }
 

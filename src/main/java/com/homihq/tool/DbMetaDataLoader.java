@@ -45,6 +45,13 @@ public final class DbMetaDataLoader {
           List<Field> fields = new ArrayList<>();
           entity.setFields(fields);
 
+          boolean compositePk =  table.getColumns().stream()
+                  .filter(c -> c.isPartOfPrimaryKey())
+                  .count() > 1;
+          entity.setCompositePk(compositePk);
+
+          String pkType = "";
+
           for (final Column column : table.getColumns()) {
 
             Field field = new Field();
@@ -60,6 +67,9 @@ public final class DbMetaDataLoader {
               field.setAutoIncremented(true);
             }
 
+            if(column.isPartOfPrimaryKey()) {
+              pkType = column.getColumnDataType().getTypeMappedClass().getSimpleName();
+            }
             field.setJavaType(column.getColumnDataType().getTypeMappedClass().getSimpleName());
 
             One2One one2One =
@@ -70,6 +80,11 @@ public final class DbMetaDataLoader {
             fields.add(field);
 
           }
+
+          if(compositePk) {
+            pkType = entityName + "Id";
+          }
+          entity.setPkType(pkType);
 
           entityList.add(entity);
         }

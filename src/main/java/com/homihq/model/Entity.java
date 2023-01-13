@@ -13,7 +13,9 @@ public class Entity {
 
     private List<Field> fields;
     private boolean autoIncrementingFieldPresent;
+    private boolean compositePk;
 
+    private String pkType;
 
 
     public static String toName(String tableName, String prefix, char delim) {
