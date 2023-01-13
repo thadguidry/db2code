@@ -13,7 +13,7 @@ public class Entity {
 
     private List<Field> fields;
     private boolean autoIncrementingFieldPresent;
-
+    private boolean compositePk;
 
 
     public static String toName(String tableName, String prefix, char delim) {
