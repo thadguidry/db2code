@@ -1,4 +1,4 @@
-package com.homihq;
+package com.homihq.tool;
 
 import lombok.*;
 import schemacrawler.inclusionrule.RegularExpressionInclusionRule;
@@ -10,7 +10,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class CodeGeneratorConfiguration {
+public class Configuration {
 
     String domainPackageName;
     String tableNamePrefix;

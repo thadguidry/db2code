@@ -1,4 +1,4 @@
-package com.homihq.tool;
+package com.homihq.generator;
 
 import com.homihq.model.Entity;
 import com.homihq.model.MetaData;

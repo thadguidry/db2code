@@ -4,12 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 
+import com.homihq.tool.Configuration;
 import com.homihq.model.Entity;
 import com.homihq.model.Field;
 import com.homihq.model.MetaData;
 import com.homihq.model.One2One;
 import com.homihq.strategy.OneToOneStrategy;
-import com.homihq.tool.JpaEntityGenerator;
+import com.homihq.generator.JpaEntityGenerator;
 import lombok.extern.slf4j.Slf4j;
 import schemacrawler.schema.Catalog;
 import schemacrawler.schema.Column;
@@ -39,7 +40,7 @@ public final class CodeGeneratorManager {
     // Set log level
     new LoggingConfig(Level.OFF);
 
-    CodeGeneratorConfiguration codeGeneratorConfiguration = CodeGeneratorConfiguration.builder()
+    Configuration configuration = Configuration.builder()
             .domainPackageName(domainPackageName)
             .tableNamePrefix(tableNamePrefix)
             .tableNameDelimiter(tableNameDelimiter)
@@ -49,7 +50,7 @@ public final class CodeGeneratorManager {
 
     // Get the schema definition
     final DatabaseConnectionSource dataSource = getDataSource();
-    final Catalog catalog = SchemaCrawlerUtility.getCatalog(dataSource, codeGeneratorConfiguration.createSchemaCrawlerOption());
+    final Catalog catalog = SchemaCrawlerUtility.getCatalog(dataSource, configuration.createSchemaCrawlerOption());
 
     List<Entity> entityList = new ArrayList<>();
     metaData.setEntityList(entityList);
