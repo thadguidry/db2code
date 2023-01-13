@@ -15,7 +15,7 @@ import java.util.Objects;
 
 public class JpaEntityGenerator {
 
-    public void generate(MetaData metaData) throws Exception{
+    public void generate(MetaData metaData, String folder) throws Exception{
         Configuration cfg = new Configuration(Configuration.VERSION_2_3_29);
         cfg.setTemplateLoader(new ClassTemplateLoader(getClass(), "/"));
 
@@ -24,9 +24,9 @@ public class JpaEntityGenerator {
                 Map<String, Object> data = new HashMap<>();
                 data.put("domainPackageName", metaData.getDomainPackageName());
                 data.put("entity", entity);
-
+                String fileAbsolutePath = folder + File.separator + entity.getName() +".java";
                 Template template = cfg.getTemplate("entity.ftl");
-                Writer writer = new FileWriter(new File( "/Users/dhrubo/Downloads/generator/" + entity.getName() +".java"));
+                Writer writer = new FileWriter(fileAbsolutePath);
                 template.process(data, writer);
                 writer.close();
             }
