@@ -203,6 +203,7 @@
           <target>17</target>
         </configuration>
       </plugin>
+      <!--
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>templating-maven-plugin</artifactId>
@@ -243,7 +244,7 @@
         <configuration>
           <tagNameFormat>@{project.version}</tagNameFormat>
         </configuration>
-        <!--
+
         <dependencies>
           <dependency>
             <groupId>org.apache.maven.shared</groupId>
@@ -252,7 +253,7 @@
           </dependency>
 
         </dependencies>
-        -->
+
       </plugin>
 
 
@@ -299,7 +300,7 @@
           </pomElements>
         </configuration>
         <executions>
-          <!-- enable flattening -->
+
           <execution>
             <id>flatten</id>
             <phase>process-resources</phase>
@@ -307,7 +308,7 @@
               <goal>flatten</goal>
             </goals>
           </execution>
-          <!-- ensure proper cleanup -->
+
           <execution>
             <id>flatten.clean</id>
             <phase>clean</phase>
@@ -317,6 +318,8 @@
           </execution>
         </executions>
       </plugin>
+      -->
+
     </plugins>
   </build>
 
