@@ -5,12 +5,12 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.homihq</groupId>
-  <artifactId>homi-jpa-tool</artifactId>
+  <artifactId>db2code</artifactId>
   <version>0.0.1-SNAPSHOT</version>
 
-  <name>JPA Code generator tool.</name>
-  <description>JPA Code generator tool</description>
-  <url>https://github.com/homihq/homi-jpa-tool</url>
+  <name>REST API Generator from DB tables.</name>
+  <description>db2code - Generates Secure REST API from DB tables. Currently it generates code for Java Spring Boot. </description>
+  <url>https://github.com/homihq/db2code</url>
 
 
   <properties>
@@ -25,7 +25,7 @@
   <licenses>
     <license>
       <name>Apache 2.0 License</name>
-      <url>https://github.com/homihq/homi-jpa-tool/blob/master/LICENSE</url>
+      <url>https://github.com/homihq/db2code/blob/master/LICENSE</url>
       <distribution>repo</distribution>
     </license>
   </licenses>
@@ -45,9 +45,9 @@
   </organization>
 
   <scm>
-    <url>https://github.com/homihq/homi-jpa-tool.git</url>
-    <connection>scm:git:git://github.com/homihq/homi-jpa-tool.git</connection>
-    <developerConnection>scm:git:git@github.com/homihq/homi-jpa-tool.git</developerConnection>
+    <url>https://github.com/homihq/db2code.git</url>
+    <connection>scm:git:git://github.com/homihq/db2code.git</connection>
+    <developerConnection>scm:git:git@github.com/homihq/db2code.git</developerConnection>
     <tag>HEAD</tag>
   </scm>
 

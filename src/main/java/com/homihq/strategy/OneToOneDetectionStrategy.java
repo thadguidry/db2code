@@ -7,7 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import schemacrawler.schema.Column;
 
 @Slf4j
-public class OneToOneStrategy {
+public class OneToOneDetectionStrategy implements AssociationDetectionStrategy<One2One> {
 
     public One2One detect(Column column, String tableNamePrefix, char tableNameDelimiter, char colNameDelimiter) {
         One2One one2One = new One2One();
