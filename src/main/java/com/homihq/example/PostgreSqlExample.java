@@ -24,6 +24,7 @@ public final class PostgreSqlExample {
     String dtoPackageName = System.getenv().get("dtoPackageName");
     String servicePackageName = System.getenv().get("servicePackageName");
     String exceptionPackageName = System.getenv().get("exceptionPackageName");
+    String controllerPackageName = System.getenv().get("controllerPackageName");
 
     String tableNamePrefix = System.getenv().get("tableNamePrefix");
     char tableNameDelimiter = System.getenv().get("tableNameDelimiter").charAt(0);
@@ -49,6 +50,7 @@ public final class PostgreSqlExample {
     metaData.setDtoPackageName(dtoPackageName);
     metaData.setServicePackageName(servicePackageName);
     metaData.setExceptionPackageName(exceptionPackageName);
+    metaData.setControllerPackageName(controllerPackageName);
 
     metaData.setEntityList(entityList);
 
@@ -68,6 +70,8 @@ public final class PostgreSqlExample {
     ExceptionGenerator exceptionGenerator = new ExceptionGenerator();
     exceptionGenerator.generate(metaData, folder);
 
+    ControllerGenerator controllerGenerator = new ControllerGenerator();
+    controllerGenerator.generate(metaData, folder);
   }
 
 }

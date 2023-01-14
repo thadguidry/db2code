@@ -12,6 +12,7 @@ public class MetaData {
     private String dtoPackageName;
     private String servicePackageName;
     private String exceptionPackageName;
+    private String controllerPackageName;
 
     private List<Entity> entityList;
 
