@@ -5,6 +5,7 @@ import java.util.logging.Level;
 
 import com.homihq.generator.DtoGenerator;
 import com.homihq.generator.RepositoryGenerator;
+import com.homihq.generator.ServiceGenerator;
 import com.homihq.model.MetaData;
 import com.homihq.tool.Configuration;
 import com.homihq.model.Entity;
@@ -24,6 +25,9 @@ public final class PostgreSqlExample {
     String domainPackageName = System.getenv().get("domainPackageName");
     String repositoryPackageName = System.getenv().get("repositoryPackageName");
     String dtoPackageName = System.getenv().get("dtoPackageName");
+    String servicePackageName = System.getenv().get("servicePackageName");
+    String exceptionPackageName = System.getenv().get("exceptionPackageName");
+
     String tableNamePrefix = System.getenv().get("tableNamePrefix");
     char tableNameDelimiter = System.getenv().get("tableNameDelimiter").charAt(0);
     char colNameDelimiter = System.getenv().get("colNameDelimiter").charAt(0);
@@ -46,6 +50,9 @@ public final class PostgreSqlExample {
     metaData.setDomainPackageName(domainPackageName);
     metaData.setRepositoryPackageName(repositoryPackageName);
     metaData.setDtoPackageName(dtoPackageName);
+    metaData.setServicePackageName(servicePackageName);
+    metaData.setExceptionPackageName(exceptionPackageName);
+
     metaData.setEntityList(entityList);
 
     String folder = System.getenv().get("folder");
@@ -57,6 +64,9 @@ public final class PostgreSqlExample {
 
     DtoGenerator dtoGenerator = new DtoGenerator();
     dtoGenerator.generate(metaData, folder);
+
+    ServiceGenerator serviceGenerator = new ServiceGenerator();
+    serviceGenerator.generate(metaData, folder);
   }
 
 }

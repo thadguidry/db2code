@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class DtoGenerator {
+public class ServiceGenerator {
 
     public void generate(MetaData metaData, String folder) throws Exception{
         Configuration cfg = new Configuration(Configuration.VERSION_2_3_29);
@@ -23,10 +23,13 @@ public class DtoGenerator {
             for(Entity entity : metaData.getEntityList()) {
                 Map<String, Object> data = new HashMap<>();
                 data.put("domainPackageName", metaData.getDomainPackageName());
+                data.put("servicePackageName", metaData.getServicePackageName());
                 data.put("dtoPackageName", metaData.getDtoPackageName());
+                data.put("repositoryPackageName", metaData.getRepositoryPackageName());
+                data.put("exceptionPackageName", metaData.getExceptionPackageName());
                 data.put("entity", entity);
-                String fileAbsolutePath = folder + File.separator + entity.getName() +".java";
-                Template template = cfg.getTemplate("entity.ftl");
+                String fileAbsolutePath = folder + File.separator + entity.getName() +"Service.java";
+                Template template = cfg.getTemplate("service.ftl");
                 Writer writer = new FileWriter(fileAbsolutePath);
                 template.process(data, writer);
                 writer.close();
