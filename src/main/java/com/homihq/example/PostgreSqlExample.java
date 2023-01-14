@@ -3,14 +3,11 @@ package com.homihq.example;
 import java.util.List;
 import java.util.logging.Level;
 
-import com.homihq.generator.DtoGenerator;
-import com.homihq.generator.RepositoryGenerator;
-import com.homihq.generator.ServiceGenerator;
+import com.homihq.generator.*;
 import com.homihq.model.MetaData;
 import com.homihq.tool.Configuration;
 import com.homihq.model.Entity;
 import com.homihq.strategy.OneToOneDetectionStrategy;
-import com.homihq.generator.JpaEntityGenerator;
 import com.homihq.tool.DbMetaDataLoader;
 import lombok.extern.slf4j.Slf4j;
 import us.fatehi.utility.LoggingConfig;
@@ -67,6 +64,10 @@ public final class PostgreSqlExample {
 
     ServiceGenerator serviceGenerator = new ServiceGenerator();
     serviceGenerator.generate(metaData, folder);
+
+    ExceptionGenerator exceptionGenerator = new ExceptionGenerator();
+    exceptionGenerator.generate(metaData, folder);
+
   }
 
 }

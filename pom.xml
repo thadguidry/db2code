@@ -9,7 +9,7 @@
   <version>0.0.3-SNAPSHOT</version>
 
   <name>REST API Generator from DB tables.</name>
-  <description>db2code - Generates Secure REST API from DB tables. Currently it generates code for Java Spring Boot. </description>
+  <description>db2code - Generates Secure REST API from DB tables. Currently, it generates code for Java Spring Boot. </description>
   <url>https://github.com/homihq/db2code</url>
 
 
@@ -17,7 +17,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>17</maven.compiler.source>
     <maven.compiler.target>17</maven.compiler.target>
-    <schemacrawler.version>16.19.5</schemacrawler.version>
+    <schemacrawler.version>16.19.6</schemacrawler.version>
     <freemarker.version>2.3.31</freemarker.version>
     <dependency-check-maven.version>7.4.4</dependency-check-maven.version>
   </properties>
