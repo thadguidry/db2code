@@ -26,7 +26,7 @@ public class DtoGenerator {
                 data.put("dtoPackageName", metaData.getDtoPackageName());
                 data.put("entity", entity);
                 String fileAbsolutePath = folder + File.separator + entity.getName() +".java";
-                Template template = cfg.getTemplate("entity.ftl");
+                Template template = cfg.getTemplate("dto.ftl");
                 Writer writer = new FileWriter(fileAbsolutePath);
                 template.process(data, writer);
                 writer.close();

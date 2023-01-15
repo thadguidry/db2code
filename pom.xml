@@ -6,7 +6,7 @@
 
   <groupId>com.homihq</groupId>
   <artifactId>db2code</artifactId>
-  <version>0.0.3</version>
+  <version>0.0.4-SNAPSHOT</version>
 
   <name>REST API Generator from DB tables.</name>
   <description>db2code - Generates Secure REST API from DB tables. Currently, it generates code for Java Spring Boot. </description>
@@ -116,11 +116,7 @@
       <activation>
         <activeByDefault>true</activeByDefault>
       </activation>
-      <!--
-      <properties>
-        <gpg.executable>gpg</gpg.executable>
-      </properties>
-      -->
+
       <distributionManagement>
         <snapshotRepository>
           <id>ossrh</id>
@@ -145,9 +141,7 @@
             <configuration>
               <serverId>ossrh</serverId>
               <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
-              <!--
               <autoReleaseAfterClose>true</autoReleaseAfterClose>
-              -->
             </configuration>
           </plugin>
           <plugin>
