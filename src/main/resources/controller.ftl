@@ -38,17 +38,24 @@ class ${(entity.name)!}Controller  {
 
     private final ${(entity.name)!}Service ${entity.name?uncap_first}Service;
 
+    <#if entity.compositePk>
+    @GetMapping("${(entity.compositePath)!}")
+    public ${(entity.name)!}Dto findById(${(entity.compositeParameters)!}) {
+        return ${entity.name?uncap_first}Service.findById(${(entity.compositeArguments)!});
+    }
+    <#else>
     @GetMapping("/{id}")
-    public ${(entity.name)!}Dto findById(@PathVariable final ${(entity.pkType)!} id) {
+        public ${(entity.name)!}Dto findById(@PathVariable final ${(entity.pkType)!} id) {
         return ${entity.name?uncap_first}Service.findById(id);
     }
+    </#if>
 
-    @GetMapping(value = "/search")
+    @GetMapping("/search")
     public Page<${(entity.name)!}Dto> search(@Filter Specification<${(entity.name)!}> spec, Pageable page) {
         return ${entity.name?uncap_first}Service.search(spec, page);
     }
 
-    @GetMapping(value = "/search/sliced")
+    @GetMapping("/search/sliced")
     public Slice<${(entity.name)!}Dto> searchBySlice(@Filter Specification<${(entity.name)!}> spec, Pageable page) {
         return ${entity.name?uncap_first}Service.searchBySlice(spec, page);
     }

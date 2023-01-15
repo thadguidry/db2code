@@ -5,6 +5,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.CaseUtils;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
 public class Entity {
@@ -16,6 +17,42 @@ public class Entity {
     private boolean compositePk;
 
     private String pkType;
+
+    public String getCompositePath() {
+        if(compositePk) {
+            return
+            fields.stream().
+                    filter(f -> f.isPartOfPk())
+                    .map(f -> "/{" + f.getName() + "}")
+                    .collect(Collectors.joining(""));
+
+        }
+        return "";
+    }
+
+    public String getCompositeParameters() {
+        if(compositePk) {
+            return
+                    fields.stream().
+                            filter(f -> f.isPartOfPk())
+                            .map(f -> "@PathVariable final " + f.getJavaType() + " " + f.getName())
+                            .collect(Collectors.joining(","));
+
+        }
+        return "";
+    }
+
+    public String getCompositeArguments() {
+        if(compositePk) {
+            return
+                    fields.stream().
+                            filter(f -> f.isPartOfPk())
+                            .map(f -> f.getName())
+                            .collect(Collectors.joining(","));
+
+        }
+        return "";
+    }
 
 
     public static String toName(String tableName, String prefix, char delim) {
