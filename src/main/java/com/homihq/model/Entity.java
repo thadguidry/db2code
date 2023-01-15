@@ -42,6 +42,30 @@ public class Entity {
         return "";
     }
 
+    public String getCompositeServiceParameters() {
+        if(compositePk) {
+            return
+                    fields.stream().
+                            filter(f -> f.isPartOfPk())
+                            .map(f -> "final " + f.getJavaType() + " " + f.getName())
+                            .collect(Collectors.joining(","));
+
+        }
+        return "";
+    }
+
+    public String getCompositeServiceArguments() {
+        if(compositePk) {
+            return
+                    fields.stream().
+                            filter(f -> f.isPartOfPk())
+                            .map(f -> f.getName())
+                            .collect(Collectors.joining(","));
+
+        }
+        return "";
+    }
+
     public String getCompositeArguments() {
         if(compositePk) {
             return

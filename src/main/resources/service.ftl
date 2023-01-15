@@ -21,12 +21,25 @@ public class ${(entity.name)!}Service  {
 
     private final ${(entity.name)!}Repository ${entity.name?uncap_first}Repository;
 
+    <#if entity.compositePk>
     @Transactional(readOnly = true)
-    public ${(entity.name)!}Dto findById(${(keyJavaType)!} id) {
+    public ${(entity.name)!}Dto findById(${(entity.compositeServiceParameters)!}) {
+        ${entity.name}Id id = new ${entity.name}Id(${entity.compositeServiceArguments});
+
         return ${entity.name?uncap_first}Repository.findById(id)
         .map(${entity.name?uncap_first} -> toDto(${entity.name?uncap_first} , new ${(entity.name)!}Dto()))
         .orElseThrow(() -> new NoDataFoundProblem());
     }
+    <#else>
+    @Transactional(readOnly = true)
+    public ${(entity.name)!}Dto findById(final ${(entity.pkType)!} id) {
+        return ${entity.name?uncap_first}Repository.findById(id)
+        .map(${entity.name?uncap_first} -> toDto(${entity.name?uncap_first} , new ${(entity.name)!}Dto()))
+        .orElseThrow(() -> new NoDataFoundProblem());
+    }
+    </#if>
+
+
 
     @Transactional(readOnly = true)
     public Page<${(entity.name)!}Dto> search(Specification<${(entity.name)!}> spec, Pageable page) {
